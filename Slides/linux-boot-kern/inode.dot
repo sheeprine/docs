@@ -1,0 +1,36 @@
+digraph inode {
+    //bgcolor=green;
+    node [shape=box, color=skyblue, style="rounded,filled"];
+    edge [arrowsize=1, color=black];
+    inode [
+        label = "inode"
+    ]
+    dblocks [
+        label = "Data Blocks"
+    ]
+    iablocks [
+        label = "Indirect address Block"
+    ]
+    iblocks [
+        label = "Indirect Blocks"
+    ]
+    inode -> dblocks [label = "Address refers to a block"]
+    inode -> iablocks [label = "Adress refers to an adress block"]
+    iablocks -> iblocks [label = "Each address refers to a data block"]
+
+    subgraph cluster_direct {
+        label = "Direct blocks addressing"
+        style = rounded
+        color = crimson
+        inode
+        dblocks
+    }
+
+    subgraph cluster_indirect {
+        label = "Indirect blocks addressing"
+        style = rounded
+        color = crimson
+        iablocks
+        iblocks
+    }
+}
